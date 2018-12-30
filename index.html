@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>个性化音乐推荐</title>
+    <script src="./static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./static/js/user_information.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./static/js/search_track.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./static/js/similar_track.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./static/js/new_track.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./static/js/hot_track.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./static/js/music_player_local.js" type="text/javascript" charset="utf-8"></script>
+    <!-- <script src="./static/js/music_play.js" type="text/javascript" charset="utf-8"></script> -->
+    <script src="./static/js/user_rating.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./static/js/get_user_cf_recommendation.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./static/js/content_similar_track.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="./static/css/rating.css">
+    <link rel="stylesheet" href="./static/css/color.css">
+    <link rel="stylesheet" href="./static/css/music-player.css">
+    <script>
+        $(function () {
+            //评分
+            var starRating = 0;
+            $('.photo span').on('mouseenter',function () {
+                var index = $(this).index();
+                // console.log("star index: " + index);
+                $(this).prevAll().find('.high').css('z-index',1)
+                $(this).find('.high').css('z-index',1)
+                $(this).nextAll().find('.high').css('z-index',0)
+                $('.starNum').html((index).toFixed(1)+'分')
+            })
+            $('.photo').on('mouseleave',function () {
+                $(this).find('.high').css('z-index',0)
+                var count = starRating
+                if(count == 5) {
+                    $('.photo span').find('.high').css('z-index',1);
+                } else {
+                    $('.photo span').eq(count).prevAll().find('.high').css('z-index',1);
+                }
+                $('.starNum').html(starRating.toFixed(1)+'分')
+            })
+            $('.photo span').on('click',function () {
+                var index = $(this).index();
+                $(this).prevAll().find('.high').css('z-index',1)
+                $(this).find('.high').css('z-index',1)
+                starRating = index;
+                $('.starNum').html(starRating.toFixed(1)+'分');
+                // alert('评分：'+(starRating.toFixed(1)+'分'))
+            })
+            //取消评分
+            $('.cancleStar').on('click',function () {
+                starRating = 0;
+                $('.photo span').find('.high').css('z-index',0);
+                $('.starNum').html(starRating.toFixed(1)+'分');
+            })
+            //确定评分
+            $('.sureStar').on('click',function () {
+                if(starRating===0) {
+                    alert('最低一颗星！');
+                } else {
+                    rating_a_track(starRating.toFixed(1));
+                   // alert('评分：'+(starRating.toFixed(1)+'分'))
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="page-title-div" id="div-page-title">
+        <h1 id="page-title">个性化音乐推荐</h1>
+    </div>
+    <script>get_user_information();</script>
+    <div class="user-information" id="div-user-information">
+        <span id="span-weclom">您好: </span>
+        <span class="user-id" id="span-user-id" hidden="hidden"></span>
+        <span class="user-name" id="span-user-name"></span>
+        <a href="./page/logout.php?action=logout">注销</a>
+    </div>
+
+    <div class="contents">
+        <div class="track-search-div" id="div-track-search">
+            <input type="text" class="track-name-search-input"
+            id="track_name_search" value="" placeholder="搜索歌曲"
+            data-unscoped-placeholder="搜索歌曲">
+            <button class="button white action-button" id="bt_search" name="track_name_submmit" onclick="search_track_onclick()">搜索</button>
+        </div>
+
+        <div class="track-search-information">
+            <table class="track-information" id="table-track-infor-search">
+                <thead>
+                    <tr>
+                        <th colspan="5" rowspan="1">搜索结果</th>
+                    </tr>
+<!--                   <tr>
+                    <th> </th>
+                    <th>操作</th>
+                    <th>音乐标题</th>
+                    <th>歌手</th>
+                    <th>专辑</th>
+                  </tr> -->
+                </thead>
+                <tbody id="tbody-track-information">
+                  <tr>
+                    <td class="td-track-number">编号</td>
+                    <td class="td-track-play">play</td>
+                    <td class="td-track-name">歌曲名</td>
+                    <td class="td-track-artist">歌手</td>
+                    <td class="td-track-album">专辑名</td
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="div-music-player">
+            <div id="div-music-player-detail">
+                <div id="div-music-playing-information">
+                    <div class="music-playing-information" id="div-name-picture-playing">
+                    </div>
+                </div>
+                <div id="div-music-player-audio">
+                    <div class="music-playing-information" id="div-music-audio-playing">
+                    </div>
+                </div>
+            </div>
+            <div id="div-rating-track">
+                <div id="starRating">
+                    <p class="photo">
+                        <b class="tip-rating" id="b-tip-rating"></b>
+                        <span><i class="high"></i><i class="nohigh"></i></span>
+                        <span><i class="high"></i><i class="nohigh"></i></span>
+                        <span><i class="high"></i><i class="nohigh"></i></span>
+                        <span><i class="high"></i><i class="nohigh"></i></span>
+                        <span><i class="high"></i><i class="nohigh"></i></span>
+                        <b class="starNum">0.0分</b>
+                    </p>
+                    <div class="bottoms">
+                        <a class="garyBtn cancleStar">取消评分</a><a class="blueBtn sureStar">确认</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="music-player-button-div" id="div-music-player-button">
+
+                <!-- <button class="button white" id="button-like-music">like</button>
+                <button class="button white" id="button-dislike-music">dislike</button>
+-->                    <!--  <button class="button white" id="button-pause-play-music">暂停播放</button> -->
+                <!-- <button class="button white" id="button_get_similar_content_track" onclick="get_similar_click()">内容相似的歌曲</button> -->
+            </div>
+        </div>
+
+        <div class="juno-track-information" id="div-juno-track-information">
+            <div class="content-similar-track-div" id="div-content-similar-track">
+              <table class="track-information" id="table-track-infor-content-similar">
+                  <thead>
+                      <tr>
+                          <th colspan="5" rowspan="1">基于CNN的相似歌曲推荐</th>
+                          <!-- <th colspan="5" rowspan="1">与此单曲相似歌曲</th> -->
+                      </tr>
+                      <!-- <tr>
+                          <th> </th>
+                          <th>操作</th>
+                          <th>音乐标题</th>
+                          <th>歌手</th>
+                          <th>专辑</th>
+                      </tr> -->
+                  </thead>
+                  <tbody id="tbody-track-information-content-similar">
+                      <tr>
+                        <td class="td-track-number">编号</td>
+                        <td class="td-track-play">play</td>
+                        <td class="td-track-name">歌曲名</td>
+                        <td class="td-track-artist">歌手</td>
+                        <td class="td-track-album">流派</td>
+                      </tr>
+                  </tbody>
+              </table>
+              <div class="track-play-tip-information" id="div-track-play-tip-information">
+              </div>
+            </div>
+
+            <div class="juno-track-player-div" id="div-juno-track-player">
+            </div>
+        </div>
+
+        <div class="cf-recommendation-track" id="div-user-item-cf-recommendation">
+            <div class="similar-track-div" id="div-similar-track" style="margin-right:40px;float:left">
+              <table class="track-information" id="table-track-infor-similar">
+                  <thead>
+                      <tr>
+                          <th colspan="5" rowspan="1">基于物品的协同过滤推荐</th>
+                          <!-- <th colspan="5" rowspan="1">听了该歌曲的用户还听了</th> -->
+                          <!-- <th>相似歌曲</th> -->
+                      </tr>
+                      <!-- <tr>
+                          <th> </th>
+                          <th>操作</th>ti
+                          <th>音乐标题</th>
+                          <th>歌手</th>
+                          <th>专辑</th>
+                      </tr> -->
+                  </thead>
+                  <tbody id="tbody-track-information-similar">
+                      <tr>
+                        <td class="td-track-number">编号</td>
+                        <td class="td-track-play">play</td>
+                        <td class="td-track-name">歌曲名</td>
+                        <td class="td-track-artist">歌手</td>
+                        <td class="td-track-album">专辑名</td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+
+            <div class="userCF-track-div" id="div-userCF-track" style="float:left;">
+                <table class="track-information" id="table-track-infor-userCF">
+                  <thead>
+                      <tr>
+                          <th colspan="5" rowspan="1">基于用户的协同过滤推荐</th>
+                          <!-- <th colspan="5" rowspan="1">猜你喜歡</th> -->
+                          <!-- <th>猜你喜歡</th> -->
+                      </tr>
+                      <!-- <tr>
+                          <th> </th>
+                          <th>操作</th>
+                          <th>音乐标题</th>
+                          <th>歌手</th>
+                          <th>专辑</th>
+                      </tr> -->
+                  </thead>
+                  <tbody id="tbody-track-information-userCF">
+                      <tr>
+                        <td class="td-track-number">编号</td>
+                        <td class="td-track-play">play</td>
+                        <td class="td-track-name">歌曲名</td>
+                        <td class="td-track-artist">歌手</td>
+                        <td class="td-track-album">专辑名</td>
+                      </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="new-hot-track" id="div-new-hot-track-neteast">
+            <div class="new-track-div" id="div-new-track" style="margin-right:40px;float:left">
+              <table class="track-information" id="table-track-infor-new">
+                  <thead>
+                      <tr>
+                          <th colspan="5" rowspan="1">新歌榜</th>
+                          <!-- <th>新歌榜</th> -->
+                      </tr>
+                      <!-- <tr>
+                          <th> </th>
+                          <th>操作</th>
+                          <th>音乐标题</th>
+                          <th>歌手</th>
+                          <th>专辑</th>
+                      </tr> -->
+                  </thead>
+                  <tbody id="tbody-track-information-new">
+                      <tr>
+                        <td class="td-track-number">编号</td>
+                        <td class="td-track-play">play</td>
+                        <td class="td-track-name">歌曲名</td>
+                        <td class="td-track-artist">歌手</td>
+                        <td class="td-track-album">专辑名</td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+
+            <div class="hot-track-div" id="div-hot-track" style="float:left;">
+              <table class="track-information" id="table-track-infor-hot">
+                  <thead>
+                      <tr>
+                          <th colspan="5" rowspan="1">热歌榜</th>
+                          <!-- <th>热歌榜</th> -->
+                      </tr>
+                      <!-- <tr>
+                          <th> </th>
+                          <th>操作</th>
+                          <th>音乐标题</th>
+                          <th>歌手</th>
+                          <th>专辑</th>
+                      </tr> -->
+                  </thead>
+                  <tbody id="tbody-track-information-hot">
+                      <tr>
+                        <td class="td-track-number">编号</td>
+                        <td class="td-track-play">play</td>
+                        <td class="td-track-name">歌曲名</td>
+                        <td class="td-track-artist">歌手</td>
+                        <td class="td-track-album">专辑名</td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+        </div>
+
+        <div class="user-rating-data" id="div-user-rating-data" style="float:left;">
+            <table class="track-information" id="table-track-infor-hot">
+                <thead>
+                  <tr>
+                      <th colspan="5" rowspan="1">您的评分记录</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-user-rating-data">
+                  <tr>
+                    <td class="td-track-number">编号</td>
+                    <td class="td-track-name">歌曲名</td>
+                    <td class="td-track-artist">歌手</td>
+                    <td class="td-track-album">专辑名</td>
+                    <td class="td-track-play">评分</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+
+    </div>
+    <script>
+        // play_music('167878');
+        click_play_track('18638057', 0);
+      	//click_play_track('508280446', 0);
+        get_new_track();
+        get_hot_track();
+        get_user_cf_recommendation();
+        get_user_all_rating();
+        // get_user_track_rating();
+    </script>
+</body>
+</html>

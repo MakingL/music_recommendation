@@ -1,0 +1,101 @@
+#div-music-player{
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+div#div-music-player-detail {
+    max-width: 570px;
+    height: 90px;
+}
+
+#div-music-playing-information{
+    width: 256px;
+    height: 90px;
+    max-width: 300px;
+    max-height: 95px;
+    text-align: center;
+/*    white-space:nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;*/
+}
+
+#div-track-artistoalbum-name-playing{
+    text-align: left;
+    float: left;
+    width: 150px;
+    max-width: 168px;
+}
+
+#div-album-picture-playing{
+    width:86px;
+    height:86px;
+    float: right;
+    margin-left: 10px;
+}
+
+#album_picture_playing{
+    width:86px;
+    height:86px;
+}
+
+#div-music-player-audio{
+    max-width: 310px;
+    margin-top: -50px;
+    float: right;
+}
+
+#audio-playing-track{
+    height: 45px;
+}
+
+/*================== music player div ===============*/
+#div-music-name-playing{
+    /*float: left;*/
+    font-weight:bold;
+    font-size:35px;
+    text-align: left;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+#div-music-name-playing:hover{
+    text-overflow:inherit;
+    overflow:visible;
+    white-space:pre-wrap;
+    word-break: keep-all;
+}
+
+#div-artist-name-playing{
+    /*float: left;*/
+    font:18px arial,sans-serif;
+    text-align: left;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+#div-artist-name-playing:hover{
+    text-overflow:inherit;
+    overflow:visible;
+    white-space:pre-wrap;
+    word-break: keep-all;
+}
+
+#div-album-name-playing{
+    float: left;
+    font:18px arial,sans-serif;
+    text-align: left;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+#div-album-name-playing:hover{
+    text-overflow:inherit;
+    overflow:visible;
+    white-space:pre-wrap;
+    word-break: keep-all;
+}
+#div-music-iframe-playing{
+    /*float: left;*/
+/*    margin-top:-65px;
+    margin-left: -20%;*/
+}

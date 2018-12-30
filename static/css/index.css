@@ -1,0 +1,212 @@
+h1 {
+    color:#666666;
+    text-align:center;
+    background-color: transparent;
+    border: none;
+    font-family: "Microsoft Yahei";
+    letter-spacing: 10px;
+}
+.track-name-search-input {
+    display: table-cell;
+    width: 13%;
+    min-height: 26px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background: none;
+    border: 1;
+    box-shadow: none;
+}
+
+/*===============user information bar ============*/
+#div-user-information{
+    float: right;
+    font-weight:bold;
+    font-size:22px;
+    margin-right: 5%;
+}
+/*input, select, textarea, button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+button, input, select, textarea {
+    font: inherit;
+    margin: 0;
+}*/
+
+
+/*============== track information ================*/
+table.track-information{
+    /*width:460px;*/
+    max-width: 480px;
+    table-layout:fixed;
+    text-align:center;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 20px;
+}
+/* 显示隐藏文字 white-space:pre-wrap 正常换行*/
+.td-track-number {
+    /*table-layout: fixed;*/
+    /*width: 10%;*/
+    width: 40px;
+    max-width: 40px;
+}
+.td-track-play {
+    /*table-layout: fixed;*/
+    /*max-width: 10%;*/
+    /*max-width: 10%;*/
+    width: 40px;
+    max-width: 40px;
+}
+.td-track-name {
+    /*table-layout: fixed;*/
+    /*max-width: 30%;*/
+    /*max-width: 30%;*/
+    width: 150px;
+    max-width: 150px;
+}
+.td-track-artist {
+    /*table-layout: fixed;*/
+    /*max-width: 30%;*/
+    /*max-width: 30%;*/
+    width: 150px;
+    max-width: 150px;
+}
+.td-track-album {
+    /*table-layout: fixed;*/
+    width: 80px;
+    max-width: 80px;
+}
+table.track-information tbody tr td {
+    border: 1px dotted #adaeaf;
+    /*background:#e7eaef;*/
+    height: 29px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;}
+table.track-information tbody tr td:hover{
+    text-overflow:inherit;
+    overflow:visible;
+    white-space:pre-wrap;
+    word-break: keep-all;
+}
+
+
+div#div-content-similar-track {
+    text-align: center;
+    max-width: 520px;
+}
+
+div#div-user-item-cf-recommendation {
+    margin-top: 20px;
+    height: 240px;
+}
+
+/*div#div-similar-track {
+    float: left;
+}*/
+
+/*div#div-userCF-track {
+    margin-left: 50px;
+    float: left;
+}*/
+
+div#div-new-hot-track-neteast {
+    margin-top: 40px;
+    height: 240px;
+}
+
+
+/*=================== content similiar track ===========*/
+div#div-juno-track-player {
+    float: right;
+    margin-top: -8%;
+    margin-right: 30%;
+}
+
+
+/*============== user rating data ===================*/
+/*div#div-user-rating-data{
+    float: left;
+}
+*/
+
+.contents {
+/*    margin-top:  5px;
+    margin-left: 15%;*/
+    background-color: transparent;
+    border: none;
+    font-family: "Microsoft Yahei";
+}
+
+/*========================= a Element ======================*/
+/*a {
+   color: #0366d6;
+   text-decoration: none;
+   background-color: transparent;
+   cursor: pointer;
+}
+a:link {
+   text-decoration:none;
+   color:#5166dd;
+}    */
+ /* unvisited link */
+
+/*a:visited {
+    text-decoration:none;
+    color:#5166dd;
+}  visited link
+
+a:hover {
+    text-decoration:underline;
+    color:#FF00FF;
+}*/
+ /* mouse over link */
+
+
+/* button
+---------------------------------------------- */
+.button {
+  display: inline-block;
+  zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+  *display: inline;
+  vertical-align: baseline;
+  margin: 0 2px;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font: 14px/100% Arial, Helvetica, sans-serif;
+  padding: .5em 2em .55em;
+  text-shadow: 0 1px 1px rgba(0,0,0,.3);
+  -webkit-border-radius: .5em;
+  -moz-border-radius: .5em;
+  border-radius: .5em;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.button:hover {
+  text-decoration: none;
+}
+.button:active {
+  position: relative;
+  top: 1px;
+}
+
+
+/*------- size --------------*/
+.bigrounded {
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+.medium {
+  font-size: 12px;
+  padding: .4em 1.5em .42em;
+}
+.small {
+  font-size: 11px;
+  padding: .2em 1em .275em;
+}

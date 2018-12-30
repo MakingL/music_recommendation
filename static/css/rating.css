@@ -1,0 +1,94 @@
+#div-rating-track{
+    height: 100px;
+    max-height: 120px;
+    width: 480px;
+    max-width: 490px;
+    float: right;
+    margin-top: -110px;
+    margin-right: 7%;
+}
+
+#starRating {
+/*    margin-top:-9%;
+    margin-right: 6%;*/
+}
+
+
+#starRating .photo span {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 42px;
+    overflow: hidden;
+    /*margin-right: 23px;*/
+    margin-right: 0px;
+    cursor: pointer;
+}
+#starRating .photo span:last-child {
+    margin-right: 5px;
+}
+#starRating .photo span .nohigh {
+    position: absolute;
+    width: 44px;
+    height: 42px;
+    top: 0;
+    left: 0;
+    background: url("../img/star.png");
+}
+#starRating .photo span .high {
+    position: absolute;
+    width: 44px;
+    height: 42px;
+    top: 0;
+    left: 0;
+    background: url("../img/star1.png");
+}
+#starRating .starNum {
+    font-size: 25px;
+    color: #de4414;
+    margin-left: 10px;
+    /*margin-top: -30px;*/
+    /*margin-bottom: 10px;*/
+}
+#starRating .bottoms {
+    height: 54px;
+    /*border-top: 1px solid #d8d8d8;*/
+}
+#starRating .photo {
+    /*float: left;*/
+    /*margin-top: 30px;*/
+}
+#starRating .bottoms a {
+    margin-bottom: 0;
+}
+#starRating .bottoms .garyBtn {
+    margin-right: 57px!important;
+}
+#starRating .bottoms a {
+    width: 75px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.2s linear;
+    margin: 16px 0 22px;
+    text-align: center;
+    cursor: pointer;
+}
+.bottoms{
+    float: right;
+    margin-right: 17%;
+}
+.garyBtn {
+    margin-right: 60px!important;
+    background-color: #e1e1e1;
+    color: #999999;
+}
+.blueBtn {
+    background-color: #1968b1;
+    color: #fff;
+}
+.blueBtn:hover {
+    background: #0e73d0;
+}

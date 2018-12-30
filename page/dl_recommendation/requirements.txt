@@ -1,0 +1,8 @@
+keras
+tensorflow
+matplotlib
+requests
+eyed3
+Pillow
+subprocess.run
+sklearn
