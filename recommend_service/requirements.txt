@@ -40,7 +40,7 @@ python-dateutil==2.7.5
 python-magic==0.4.15
 python-magic-bin==0.4.14
 pytz==2018.7
-PyYAML>=4.2b1
+PyYAML==3.13
 requests==2.20.1
 scikit-learn==0.20.2
 scikit-surprise==1.0.6
