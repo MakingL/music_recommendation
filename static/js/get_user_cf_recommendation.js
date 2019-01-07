@@ -11,7 +11,7 @@ function get_user_cf_recommendation() {
                 }
                 var user_id = data_obj['userid'];
                 console.log("user id for recommendations:" + user_id);
-                $.post("./page/collaborative_filtering/get_user_recommendation.php",
+                $.post("./page/get_user_recommendation.php",
                     {"user_id" : user_id},
                     function(data,status){
                         console.log(data);

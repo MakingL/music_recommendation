@@ -13,10 +13,6 @@ $user_id = $_POST['user_id'];
 $track_id = $_POST['track_id'];
 $rating = $_POST['rating'];
 
-// $record_id = md5(uniqid());
-// $user_id = "7147fe199c61be0625a5323e24617375";
-// $track_id = "167878";
-// $rating = "4";
 
 include("_connectDB.php");
 // 先查看数据库中是否有该用户对该歌曲的评分

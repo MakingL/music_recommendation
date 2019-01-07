@@ -121,16 +121,19 @@ div#div-new-hot-track-neteast {
 /*=================== content similiar track ===========*/
 div#div-juno-track-player {
     float: right;
-    margin-top: -8%;
+    margin-top: -20%;
     margin-right: 30%;
 }
 
 
 /*============== user rating data ===================*/
-/*div#div-user-rating-data{
-    float: left;
+div#div-user-rating-data{
+    float: none;
 }
-*/
+
+div#div-user-rating-data {
+    margin-top: 180px;
+}
 
 .contents {
 /*    margin-top:  5px;
