@@ -4,9 +4,22 @@
 
 ---
 
+@[toc]
+
 ## 介绍
 
-项目主要工作在 `Million Song Dataset` 数据集下基于 `Python` 的 `surprise` 库实现了基于协同过滤的音乐推荐，还有用 CNN (卷积神经网络) 实现相似音乐推荐。
+项目主要工作在 `Million Song Dataset` 数据集下基于 `Python` 的 `scikit-surprise`  库实现了基于协同过滤的音乐推荐，还有用 CNN (卷积神经网络) 实现相似音乐推荐。
+
+其中，协同过滤主要基于 Python `scikit-surprise` 库的 [文档(Documents)](https://surprise.readthedocs.io/en/stable/) 写的协同过滤算法， 所采用的数据集的原因，协同过滤出来的指标比较低，系统中协同过滤的结果采用三个算法输出的结果投票。
+
+另外就是参照下面的参考项目做了基于深度学习的音乐推荐，该项目主要实现相似相似旋律的音乐推荐。其主要通过 CNN 对音乐音频信息进行特征提取，然后对提取后的特征向量与实现保存好的一些音乐特征向量进行相似度匹配，将相似度最高的几首音乐作为推荐结果。该方法可以用于音乐检索，音乐防抄袭等领域。
+
+本项目特有的部分是，将上述两种方法融合，并写了个 web 展示效果。由于 `Million Song Dataset` 数据集没有歌曲内容信息，本人找了某易云的爬虫代码，建立 `Million Song Dataset` 数据集中的音乐 id 与 某易云的音乐 id 的映射（期间被封过 IP）。然后将音乐的内容进行时频转换后，送入卷积神经网络，得到歌曲特征向量，通过特征向量的相似度匹配，找出相似的音乐信息。
+
+项目未来发展规划：
+
+  - 后端语言采用了 PHP + Python，未来可以统一为 Python 实现
+  - 系统依赖 `SOX` 工具，安装配置复杂，希望未来有机会实现 Docker 部署
 
 ## 参考项目
 
@@ -21,8 +34,8 @@
 ## 技术栈
 
 - Python-Flask
-- keras
-- surprise
+- Python keras
+- Python `scikit-surprise`
 - PHP/MySQL
 - HTML/CSS/JQuery
 
@@ -100,6 +113,11 @@ Python 3.6.5
 
 ![CNN推荐结果](./screenshot/CNN推荐结果.gif)
 
+## 相关资源推荐
+
+1. [提供免费音乐的音乐库网站](https://www.yuque.com/ruanyf/share/free-music)
+
+2. [推荐系统研究中的九大数据集](https://zhuanlan.zhihu.com/p/29416305)
 
   [1]: https://yq.aliyun.com/articles/154475?spm=a2c4e.11153940.blogcont221660.38.fc258f9bDs7fml
   [2]: http://mattmurray.net/building-a-music-recommender-with-deep-learning/
