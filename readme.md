@@ -119,9 +119,12 @@ Python 3.6.5
 
 2. [推荐系统研究中的九大数据集](https://zhuanlan.zhihu.com/p/29416305)
 
+3. [推荐系统基础知识 --- Github](https://github.com/apachecn/RecommenderSystems)
+
   [1]: https://yq.aliyun.com/articles/154475?spm=a2c4e.11153940.blogcont221660.38.fc258f9bDs7fml
   [2]: http://mattmurray.net/building-a-music-recommender-with-deep-learning/
   [3]: https://blog.csdn.net/qq_35547879/article/details/79700591
   [4]: https://codeday.me/bug/20180610/174453.html
   [5]: https://github.com/JoFrhwld/FAVE/wiki/Sox-on-Windows
   [6]: https://stackoverflow.com/questions/3537155/sox-fail-util-unable-to-load-mad-decoder-library-libmad-function-mad-stream
+
