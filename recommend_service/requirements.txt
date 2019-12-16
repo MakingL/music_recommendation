@@ -49,7 +49,7 @@ six==1.12.0
 sklearn==0.0
 surprise==0.1
 tensorboard==1.12.0
-tensorflow==1.12.2
+tensorflow==1.15.0
 termcolor==1.1.0
 tornado==5.1.1
 urllib3>=1.24.2
