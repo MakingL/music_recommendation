@@ -1,6 +1,6 @@
-# 协同过滤音乐推荐
+# 协同过滤音乐推荐 (Docker 部署）
 
-协同过滤 音乐推荐 深度学习 音乐检索
+协同过滤 音乐推荐 深度学习 音乐检索 Docker
 
 ---
 
@@ -16,11 +16,6 @@
 
 本项目特有的部分是，将上述两种方法融合，并写了个 web 展示效果。由于 `Million Song Dataset` 数据集没有歌曲内容信息，本人找了某易云的爬虫代码，建立 `Million Song Dataset` 数据集中的音乐 id 与 某易云的音乐 id 的映射（期间被封过 IP）。然后将音乐的内容进行时频转换后，送入卷积神经网络，得到歌曲特征向量，通过特征向量的相似度匹配，找出相似的音乐信息。
 
-项目未来发展规划：
-
-  - 后端语言采用了 PHP + Python，未来可以统一为 Python 实现
-  - 系统依赖 `SOX` 工具，安装配置复杂，希望未来有机会实现 Docker 部署
-
 ## 参考项目
 
 1. 中文地址
@@ -33,85 +28,58 @@
 
 ## 技术栈
 
-- Python-Flask
-- Python keras
-- Python `scikit-surprise`
-- PHP/MySQL
-- HTML/CSS/JQuery
+- Python Flask + Tensorflow + scikit-surprise
+- PHP/MySQL/HTML/CSS/JQuery
 
-## 安装
+## Docker 部署
 
-### `Pyhton` 版本
+### 依赖
 
-Python 3.6.5
+- Docker
+- Docker-compose
 
-### `Python` 环境安装：
+### 运行步骤
 
-切换到 `recommend_service` 目录，`pip install -r requirements.txt`
+1. clone 此项目 `git clone git@github.com:MakingL/music_recommendation.git`, `cd music_recommendation`
+2. 先 `git fetch --all`, 切换到分支 `git checkout docker-config`
+3. 启动 docker 容器: `docker-compose up -d`
+4. 导入数据库
 
-### Web 环境：
+    - 浏览器访问 PHPAdmin: `http://localhost:8080/` (此处的地址 `localhost` 应根据实际情况而定)
+    - `root` 用户密码: `tiger`
+    - 新建数据库， 注意编码为 `utf8mb4`
+      - 数据库名： `music_recommender`
+      - 用户名： `music_system` (注意给权限)
+      - 密码： `music_system`
+    - 导入数据 `vender/DataBase/music_recommender.sql` 到该数据库
 
-需要安装 `LAMP` or `WAMP` 环境，即 Appache ，MySQL，PHP 服务器
+5. 在浏览器中访问网站 `http://localhost/`，预置的登录用户:
 
-### 音频处理软件 —— SOX
-
-安装 `sox` 软件（sox 是开源的音频处理软件）
-[SOX 安装教程][3]
-[SOX 下载链接][4]
-[加入系统环境][5]
-
-#### 可能会出现的报错
-
-`windows` 下 `Unable to load MAD decoder library (libmad) function`
-
-解决方法可参考  [参考教程][6]
-
-此报错只需下载相应的两个库文件，放到 `sox` 安装目录下
-
-## 数据库--- MySQL
-
-数据库名： `music_recommender`
-用户名： `music_system`
-密码： `music_system`
-然后，导入 `music_recommender.sql` 文件中的数据
-
-## 运行
-
-1. 先运行 `recommend_service` 目录下的 `recommend_service.py` 文件，`python recommend_service.py`，Linux 下也可以运行命令 `nohup python recommend_service.py 2>&1 >dataOut.txt &`，让其后台执行
-2. 将项目文件部署到 `Apache` www 目录下
-3. 在浏览器中访问该网站
-
-## 默认用户
-
-1. 用户名： `admin`， 密码： `admin123`
-2. 用户名： `root`， 密码： `root1234`
+    - 用户名： `admin`， 密码： `admin123`
+    - 用户名： `root`， 密码： `root1234`
 
 ## 运行界面
 
-- Python 程序启动
-
-![Python 程序启动](./screenshot/启动Python.gif)
-
 - 用户登录
 
-![用户登录](./screenshot/用户登录.gif)
+![用户登录](./vender/screenshot/用户登录.gif)
 
 - 协同过滤推荐
 
-![协同过滤推荐](./screenshot/协同过滤推荐.gif)
-![协同过滤推荐2](./screenshot/协同过滤推荐_2.gif)
+![协同过滤推荐](./vender/screenshot/协同过滤推荐.gif)
+![协同过滤推荐2](./vender/screenshot/协同过滤推荐_2.gif)
 
 - 搜索歌曲
 
-![搜索歌曲](./screenshot/搜索歌曲.gif)
+![搜索歌曲](./vender/screenshot/搜索歌曲.gif)
 
 - 播放歌曲
 
-![播放歌曲](./screenshot/播放歌曲.gif)
+![播放歌曲](./vender/screenshot/播放歌曲.gif)
 
 - CNN推荐结果
 
-![CNN推荐结果](./screenshot/CNN推荐结果.gif)
+![CNN推荐结果](./vender/screenshot/CNN推荐结果.gif)
 
 ## 相关资源推荐
 
@@ -127,4 +95,3 @@ Python 3.6.5
   [4]: https://codeday.me/bug/20180610/174453.html
   [5]: https://github.com/JoFrhwld/FAVE/wiki/Sox-on-Windows
   [6]: https://stackoverflow.com/questions/3537155/sox-fail-util-unable-to-load-mad-decoder-library-libmad-function-mad-stream
-
