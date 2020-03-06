@@ -114,7 +114,7 @@ def collaborative_fitlering( raw_uid):
 
     # 数据库操作
     # 打开数据库连接
-    db = pymysql.connect("localhost",
+    db = pymysql.connect("mysql",
                          "music_system",
                          "music_system",
                          "music_recommender",
