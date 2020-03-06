@@ -16,11 +16,6 @@
 
 本项目特有的部分是，将上述两种方法融合，并写了个 web 展示效果。由于 `Million Song Dataset` 数据集没有歌曲内容信息，本人找了某易云的爬虫代码，建立 `Million Song Dataset` 数据集中的音乐 id 与 某易云的音乐 id 的映射（期间被封过 IP）。然后将音乐的内容进行时频转换后，送入卷积神经网络，得到歌曲特征向量，通过特征向量的相似度匹配，找出相似的音乐信息。
 
-项目未来发展规划：
-
-  - 后端语言采用了 PHP + Python，未来可以统一为 Python 实现
-  - 系统依赖 `SOX` 工具，安装配置复杂，希望未来有机会实现 Docker 部署
-
 ## 参考项目
 
 1. 中文地址
@@ -38,6 +33,10 @@
 - Python `scikit-surprise`
 - PHP/MySQL
 - HTML/CSS/JQuery
+
+## Docker 部署
+
+  已支持 Docker 部署，方便复现及修改代码。Docker 部署版见 `docker-config` 分支
 
 ## 安装
 
