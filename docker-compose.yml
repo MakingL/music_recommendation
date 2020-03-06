@@ -1,0 +1,64 @@
+version: "3"
+
+services:
+  webserver:
+    build:
+      context: ./dockers/bin/webserver
+    container_name: 'mcr-webserver'
+    restart: 'always'
+    ports:
+      - "80:80"
+    networks:
+      - web_network
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ${DOCUMENT_ROOT-./web}:/var/www/html
+      - ${PHP_INI-./dockers/config/php/php.ini}:/usr/local/etc/php/php.ini
+      - ${VHOSTS_DIR-./dockers/config/vhosts}:/etc/apache2/sites-enabled
+      - ${LOG_DIR-./dockers/logs/apache2}:/var/log/apache2
+      - ${MUSIC_DATA_DIR-./music_data}:/var/www/html/music_data
+  mysql:
+    image: mysql:5.7
+    container_name: 'mcr-mysql'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max_allowed_packet=32505856
+    restart: 'always'
+    networks:
+      - web_network
+    ports:
+      - "3306:3306"
+    volumes:
+      - ${MYSQL_DATA_DIR-./data/mysql}:/var/lib/mysql
+      - ${MYSQL_LOG_DIR-./logs/mysql}:/var/log/mysql
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: tiger
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: 'mcr-phpmyadmin'
+    networks:
+      - web_network
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - '8080:80'
+  recommend_servce:
+    build:
+      context: ./recommend_service/
+    container_name: 'mcr_recommend_service'
+    restart: 'always'
+    command: python3 recommend_service.py
+    environment:
+      TZ: 'Asia/Shanghai'
+    volumes:
+      - ${MUSIC_DATA_DIR-./music_data}:/music_data
+      - ${RECOMMEND_SERVICE_ROOT-./recommend_service}:/code
+    networks:
+      - web_network
+    ports:
+      - '6016:6016'
+
+networks:
+  web_network:
+    driver: bridge
