@@ -84,13 +84,13 @@ function doCurlPostRequest($url, $data = null)
 }
 
 $request_data["msg"] = "dl_recommend";
-$request_data["track_path"] = $path_track;
+$request_data["track_path"] = $track_save_path;
 $data = json_encode(
   $request_data,
   JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
 );
 
-$recommend_result = doCurlPostRequest("http://localhost:6016/dl_recommend", $data);
+$recommend_result = doCurlPostRequest("http://recommend_servce:6016/dl_recommend", $data);
 
 if (empty($recommend_result) || $recommend_result == "500") {
   $action_data['code'] = '500';

@@ -43,7 +43,7 @@ $data = json_encode(
   JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
 );
 
-$recommend_result  = doCurlPostRequest("http://localhost:6016/cf_recommend", $data);
+$recommend_result  = doCurlPostRequest("http://recommend_servce:6016/cf_recommend", $data);
 if (empty($recommend_result)) {
   $result_data['code'] = '500';
   $result_data['masg'] = "Server Error";

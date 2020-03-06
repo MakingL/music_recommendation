@@ -94,4 +94,3 @@ function click_play_track(song_id, autoplay=1) {
     get_user_track_rating(song_id);
     add_similarity_track(song_id);
 }
-
