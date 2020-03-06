@@ -43,9 +43,9 @@
 1. clone 此项目 `git clone git@github.com:MakingL/music_recommendation.git`, `cd music_recommendation`
 2. 先 `git fetch --all`, 切换到分支 `git checkout docker-config`
 3. 启动 docker 容器: `docker-compose up -d`
-4. 导入数据库
+4. 导入数据库，PHPMyAdmin 导入 SQL 文件不能超过 2M，建议用 Navicat 导入
 
-    - 浏览器访问 PHPAdmin: `http://localhost:8080/` (此处的地址 `localhost` 应根据实际情况而定)
+    - 浏览器访问 PHPMyAdmin: `http://localhost:8080/` (此处的地址 `localhost` 应根据实际情况而定)
     - `root` 用户密码: `tiger`
     - 新建数据库， 注意编码为 `utf8mb4`
       - 数据库名： `music_recommender`
