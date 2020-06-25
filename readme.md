@@ -26,6 +26,10 @@
 
    [building a music recommender with deep learning][2]
 
+## 微信小程序版实现
+
+本项目的微信小程序版: [Github LE7ELS/music_recommendation_miniapp](https://github.com/LE7ELS/music_recommendation_miniapp)
+
 ## 技术栈
 
 - Python-Flask
