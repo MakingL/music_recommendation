@@ -5,7 +5,7 @@ pandas==1.0.1
 scikit-learn==0.22.2
 scikit-surprise==1.1.0
 eyeD3==0.9.3
-pillow==7.0.0
+pillow==8.1.1
 Flask==1.1.1
 PyMySQL==0.9.3
 requests==2.23.0
