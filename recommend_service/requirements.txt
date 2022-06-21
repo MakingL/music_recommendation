@@ -1,6 +1,6 @@
 Keras==2.2.4
 tensorflow==1.15
-numpy==1.18.1
+numpy==1.22.0
 pandas==1.0.1
 scikit-learn==0.22.2
 scikit-surprise==1.1.0
